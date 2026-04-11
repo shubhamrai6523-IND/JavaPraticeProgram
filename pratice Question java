@@ -1,0 +1,394 @@
+import java.util.Scanner;
+import java.util.StringTokenizer;
+import java.util.InputMismatchException;
+
+// ==========================================
+// UNIT III: Java Strings
+// ==========================================
+
+class UsernameValidator {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter username: ");
+        String username = sc.nextLine();
+        
+        String cleaned = username.trim().toLowerCase();
+        System.out.println("Cleaned username: " + cleaned);
+    }
+}
+
+class EmailChecker {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter email address: ");
+        String email = sc.nextLine();
+        
+        if (email.contains("@gmail.com")) {
+            System.out.println("Valid Gmail Address");
+        } else {
+            System.out.println("Invalid Email");
+        }
+    }
+}
+
+class StudentNameComparison {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter first student name: ");
+        String name1 = sc.nextLine();
+        System.out.print("Enter second student name: ");
+        String name2 = sc.nextLine();
+        
+        System.out.println("Case-sensitive comparison: " + name1.equals(name2));
+        System.out.println("Case-insensitive comparison: " + name1.equalsIgnoreCase(name2));
+    }
+}
+
+class MessageFormatter {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter first name: ");
+        String firstName = sc.nextLine();
+        System.out.print("Enter last name: ");
+        String lastName = sc.nextLine();
+        
+        String fullName = firstName + " " + lastName;
+        System.out.println("Full Name: " + fullName);
+    }
+}
+
+class FileExtensionExtractor {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter file name: ");
+        String fileName = sc.nextLine();
+        
+        int dotIndex = fileName.lastIndexOf(".");
+        if (dotIndex != -1) {
+            String extension = fileName.substring(dotIndex);
+            System.out.println("Extracted extension: " + extension);
+        } else {
+            System.out.println("No extension found.");
+        }
+    }
+}
+
+class WordCounter {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a sentence: ");
+        String sentence = sc.nextLine();
+        
+        StringTokenizer tokenizer = new StringTokenizer(sentence);
+        System.out.println("Total number of words: " + tokenizer.countTokens());
+    }
+}
+
+class TextEditorBuffer {
+    public static void main(String[] args) {
+        StringBuffer buffer = new StringBuffer("Hello");
+        buffer.append(" World");
+        buffer.insert(5, " Beautiful");
+        
+        System.out.println("Before reversing: " + buffer);
+        buffer.reverse();
+        System.out.println("Final reversed string: " + buffer);
+    }
+}
+
+class TextProcessingBuilder {
+    public static void main(String[] args) {
+        StringBuilder builder = new StringBuilder("Java");
+        builder.append(" is awesome!");
+        System.out.println("Modified string: " + builder);
+        
+        /* Comment: StringBuilder is faster and not thread-safe (non-synchronized), 
+         * whereas StringBuffer is slower but thread-safe (synchronized). 
+         */
+    }
+}
+
+class Student {
+    int id;
+    String name;
+    
+    public Student(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
+    @Override
+    public String toString() {
+        return "Student ID: " + id + ", Name: " + name;
+    }
+    
+    public static void main(String[] args) {
+        Student s1 = new Student(101, "Alice");
+        System.out.println(s1.toString());
+    }
+}
+
+class PasswordMaskingSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter password: ");
+        String password = sc.nextLine();
+        
+        if (password.length() > 2) {
+            String toReplace = password.substring(0, password.length() - 2);
+            String stars = "";
+            for (int i = 0; i < toReplace.length(); i++) {
+                stars += "*";
+            }
+            String masked = password.replace(toReplace, stars);
+            System.out.println("Masked password: " + masked);
+        } else {
+            System.out.println("Masked password: " + password);
+        }
+    }
+}
+
+// ==========================================
+// UNIT IV: Exception Handling & Multithreading
+// ==========================================
+
+class ATMWithdrawal {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter balance: ");
+        double balance = sc.nextDouble();
+        System.out.print("Enter withdrawal amount: ");
+        double amount = sc.nextDouble();
+        
+        try {
+            if (amount > balance) {
+                throw new Exception("Insufficient Balance");
+            }
+            balance -= amount;
+            System.out.println("Withdrawal successful. Remaining balance: " + balance);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+class DivisionCalculator {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter two integers: ");
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        
+        try {
+            int result = a / b;
+            System.out.println("Result: " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Cannot divide by zero");
+        }
+    }
+}
+
+class StudentInputSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter student age: ");
+        
+        try {
+            int age = sc.nextInt();
+            int check = 100 / age; 
+            System.out.println("Student age is: " + age);
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input");
+        } catch (ArithmeticException e) {
+            System.out.println("Invalid input");
+        }
+    }
+}
+
+class FileProcessingSystem {
+    public static void main(String[] args) {
+        try {
+            System.out.println("Reading file...");
+            int data = 10 / 0; 
+        } catch (Exception e) {
+            System.out.println("Error reading file.");
+        } finally {
+            System.out.println("Closing file resources");
+        }
+    }
+}
+
+class BankApplication {
+    static void processTransaction() throws Exception {
+        throw new Exception("Transaction Error");
+    }
+
+    public static void main(String[] args) {
+        try {
+            processTransaction();
+            System.out.println("Transaction processed");
+        } catch (Exception e) {
+            System.out.println("Exception handled in main");
+        }
+    }
+}
+
+class MusicPlayer extends Thread {
+    public void run() {
+        System.out.println("Playing song...");
+        for (int i = 1; i <= 3; i++) {
+            try {
+                System.out.println("Progress " + i);
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        MusicPlayer player = new MusicPlayer();
+        player.start();
+    }
+}
+
+class DownloadManager implements Runnable {
+    String fileName;
+    
+    public DownloadManager(String fileName) {
+        this.fileName = fileName;
+    }
+    
+    public void run() {
+        System.out.println("Downloading " + fileName + " messages.");
+    }
+
+    public static void main(String[] args) {
+        Thread t1 = new Thread(new DownloadManager("File1"));
+        Thread t2 = new Thread(new DownloadManager("File2"));
+        t1.start();
+        t2.start();
+    }
+}
+
+class RailwayReservation {
+    int availableTickets = 1;
+
+    synchronized void bookTicket(String name) {
+        if (availableTickets > 0) {
+            System.out.println(name + ": Ticket booked successfully");
+            availableTickets--;
+        } else {
+            System.out.println(name + ": No tickets available");
+        }
+    }
+
+    public static void main(String[] args) {
+        RailwayReservation system = new RailwayReservation();
+        Thread t1 = new Thread(() -> system.bookTicket("User 1"));
+        Thread t2 = new Thread(() -> system.bookTicket("User 2"));
+        
+        t1.start();
+        t2.start();
+    }
+}
+
+class OnlineShoppingSystem {
+    public static void main(String[] args) {
+        Thread payment = new Thread(() -> System.out.println("Processing payment..."));
+        Thread order = new Thread(() -> System.out.println("Order confirmed..."));
+        
+        payment.start();
+        try { payment.join(); } catch (InterruptedException e) {}
+        order.start();
+    }
+}
+
+class ThreadPrioritySystem extends Thread {
+    public void run() {
+        System.out.println(Thread.currentThread().getName() + " executing messages.");
+    }
+
+    public static void main(String[] args) {
+        ThreadPrioritySystem t1 = new ThreadPrioritySystem();
+        ThreadPrioritySystem t2 = new ThreadPrioritySystem();
+        
+        t1.setName("Low Priority Thread");
+        t2.setName("High Priority Thread");
+        
+        t1.setPriority(Thread.MIN_PRIORITY);
+        t2.setPriority(Thread.MAX_PRIORITY);
+        
+        t1.start();
+        t2.start();
+    }
+}
+
+class Restaurant {
+    boolean foodReady = false;
+
+    synchronized void prepareFood() {
+        System.out.println("Chef prepared food");
+        foodReady = true;
+        notify();
+    }
+
+    synchronized void serveFood() {
+        while (!foodReady) {
+            try { wait(); } catch (InterruptedException e) {}
+        }
+        System.out.println("Waiter served food");
+        foodReady = false;
+    }
+
+    public static void main(String[] args) {
+        Restaurant r = new Restaurant();
+        new Thread(r::serveFood).start();
+        new Thread(r::prepareFood).start();
+    }
+}
+
+class BankingSystem {
+    int balance = 1000;
+
+    void withdraw(int amount, String user) {
+        synchronized (this) {
+            if (balance >= amount) {
+                balance -= amount;
+                System.out.println(user + " deducted " + amount + ". Remaining balance: " + balance);
+            } else {
+                System.out.println(user + " attempted deduction. Insufficient funds.");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        BankingSystem bank = new BankingSystem();
+        Thread t1 = new Thread(() -> bank.withdraw(600, "Alice"));
+        Thread t2 = new Thread(() -> bank.withdraw(600, "Bob"));
+        
+        t1.start();
+        t2.start();
+    }
+}
+
+class ChatApplication {
+    public static void main(String[] args) {
+        Thread sender = new Thread(() -> {
+            System.out.println("Sending messages...");
+            try { Thread.sleep(500); } catch (Exception e) {}
+            System.out.println("Message sent.");
+        });
+
+        Thread receiver = new Thread(() -> {
+            System.out.println("Waiting to receive messages...");
+            try { Thread.sleep(1000); } catch (Exception e) {}
+            System.out.println("Receiving messages.");
+        });
+
+        System.out.println("Sender State before start: " + sender.getState()); // NEW
+        sender.start();
+        receiver.start();
+        System.out.println("Sender State after start: " + sender.getState()); // RUNNABLE
+    }
+}
